@@ -1,10 +1,8 @@
 /* app.js - Vanilla JS implementation for RISE Behaviour Flow */
-
 document.addEventListener('DOMContentLoaded', () => {
   let role = null;
   let query = '';
   let selectedPath = [];
-
   const root = document.getElementById('root');
 
   function getCurrentNode() {
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const results = [];
     if (!term) return results;
     const searchTerm = term.toLowerCase();
-    const roles = role ? [role] : Object.keys(data);
+    const roles = Object.keys(data);
     roles.forEach(r => {
       function traverse(node, path, title) {
         if (typeof node === 'string') {
@@ -87,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const small = document.createElement('div');
           small.textContent = 'Role: ' + res.role;
           small.className = 'text-sm text-gray-500 mb-1';
-          const title = document.createElement('h3');
-          title.textContent = res.title;
-          title.className = 'font-semibold text-lg mb-2';
+          const titleEl = document.createElement('h3');
+          titleEl.textContent = res.title;
+          titleEl.className = 'font-semibold text-lg mb-2';
           const para = document.createElement('p');
           para.textContent = res.content;
           card.appendChild(small);
-          card.appendChild(title);
+          card.appendChild(titleEl);
           card.appendChild(para);
           root.appendChild(card);
         });
@@ -159,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
           h2.textContent = key.replace(/-/g, ' ');
           h2.className = 'font-semibold text-lg mb-2 capitalize';
           section.appendChild(h2);
+
           if (typeof sectionVal === 'string') {
             const p = document.createElement('p');
             p.textContent = sectionVal;
